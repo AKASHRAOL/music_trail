@@ -1,0 +1,245 @@
+/* Reset & base */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f0ff 0%, #e0d4f7 100%);
+  overflow-x: hidden;
+  color: #333;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Butterfly background container */
+.butterfly-background {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+  background: transparent;
+}
+
+/* Simple stylized butterflies (circles with wings using before/after) */
+.butterfly {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle at center, #ff69b4 40%, transparent 70%);
+  border-radius: 50%;
+  animation: fly linear infinite;
+  filter: drop-shadow(0 0 2px #ff69b4cc);
+}
+
+.butterfly::before,
+.butterfly::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  height: 20px;
+  background: #ff69b4cc;
+  border-radius: 50% 50% 0 0;
+  transform-origin: bottom center;
+  animation: flap 1.5s ease-in-out infinite;
+}
+
+.butterfly::before {
+  left: -18px;
+  transform: translateY(-50%) rotate(25deg);
+  animation-delay: 0s;
+}
+
+.butterfly::after {
+  right: -18px;
+  transform: translateY(-50%) rotate(-25deg);
+  animation-delay: 0.75s;
+}
+
+/* Different positions and speeds */
+.butterfly1 {
+  top: 20%;
+  left: 10%;
+  animation-duration: 18s;
+}
+
+.butterfly2 {
+  top: 60%;
+  left: 25%;
+  animation-duration: 20s;
+  animation-delay: 3s;
+}
+
+.butterfly3 {
+  top: 40%;
+  left: 80%;
+  animation-duration: 15s;
+  animation-delay: 1s;
+}
+
+.butterfly4 {
+  top: 75%;
+  left: 55%;
+  animation-duration: 22s;
+  animation-delay: 4s;
+}
+
+.butterfly5 {
+  top: 15%;
+  left: 75%;
+  animation-duration: 19s;
+  animation-delay: 6s;
+}
+
+/* Flying animation: moves horizontally and vertically looping */
+@keyframes fly {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(20px, -15px) rotate(20deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+/* Wings flap */
+@keyframes flap {
+  0%, 100% {
+    transform: translateY(-50%) rotate(25deg);
+  }
+  50% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+}
+
+/* Player container */
+.player {
+  max-width: 320px;
+  margin: 60px auto 80px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 30px rgba(255, 105, 180, 0.3);
+  position: relative;
+  z-index: 10;
+  text-align: center;
+}
+
+/* Album cover & progress circle wrapper */
+.album-wrapper {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 20px;
+}
+
+/* Circular progress ring */
+.progress-ring__circle {
+  transition: stroke-dashoffset 0.35s ease;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  stroke-linecap: round;
+}
+
+/* Album cover */
+.album-cover {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 20px #ff69b4aa;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Controls row */
+.controls-row {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  margin-bottom: 15px;
+  user-select: none;
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #ff69b4;
+  transition: color 0.3s ease;
+}
+
+.btn:hover {
+  color: #d1478e;
+}
+
+/* Play/Pause SVG icons */
+.play-pause svg {
+  pointer-events: none;
+}
+
+/* Progress linear slider */
+.progress-linear-wrapper {
+  margin: 0 10px 20px;
+}
+
+#progress-linear {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: #ff69b4aa;
+  height: 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+}
+
+#progress-linear::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #ff69b4;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 5px #ff69b4cc;
+  border: none;
+  margin-top: -4px;
+  transition: background-color 0.3s ease;
+}
+
+#progress-linear::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: #ff69b4;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 5px #ff69b4cc;
+  transition: background-color 0.3s ease;
+}
+
+/* Info text */
+.info .title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #bb2f78;
+}
+
+.info .artist {
+  margin: 5px 0 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #d95eaa;
+  user-select: none;
+}
